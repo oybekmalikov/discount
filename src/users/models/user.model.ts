@@ -1,4 +1,5 @@
-import { Column, DataType, Model, Table } from "sequelize-typescript";
+import { Column, DataType, HasMany, Model, Table } from "sequelize-typescript";
+import { Store } from "../../store/models/store.model";
 
 interface IUserCreationAttr {
 	name: string;
@@ -33,4 +34,6 @@ export class User extends Model<User, IUserCreationAttr> {
 	declare location: string;
 	@Column({ type: DataType.UUID, defaultValue: DataType.UUIDV4() })
 	declare activation_link: string;
+	@HasMany(() => Store)
+	store: Store[];
 }
