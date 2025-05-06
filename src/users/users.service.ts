@@ -5,15 +5,19 @@ import {
 } from "@nestjs/common";
 import { InjectModel } from "@nestjs/sequelize";
 import * as bcrypt from "bcrypt";
+import * as otpGenerator from "otp-generator";
+import { BotService } from "../bot/bot.service";
 import { MailService } from "../mail/mail.service";
 import { CreateUserDto } from "./dto/create-user.dto";
+import { PhoneUserDto } from "./dto/phone-user.dto";
 import { UpdateUserDto } from "./dto/update-user.dto";
 import { User } from "./models/user.model";
 @Injectable()
 export class UsersService {
 	constructor(
 		@InjectModel(User) private readonly userModel: typeof User,
-		private readonly mailService: MailService
+		private readonly mailService: MailService,
+		private readonly botService: BotService
 	) {}
 	async create(createUserDto: CreateUserDto) {
 		const { password, confirm_password } = createUserDto;
@@ -81,5 +85,21 @@ export class UsersService {
 			{ where: { id } }
 		);
 		return updatedUser;
+	}
+	async newOtp(phoneUserDto: PhoneUserDto) {
+		const phone_number = phoneUserDto.phone;
+		const otp = otpGenerator.generate(4, {
+			upperCaseAlphabets: false,
+			lowerCaseAlphabets: false,
+			specialChars: false,
+		});
+		// -------------------BOT----------------------
+		const isSend = await this.botService.sendOtp(phone_number, otp);
+		if (!isSend) {
+			throw new BadRequestException("Register from bot");
+		}
+		return {
+			message: "OTP sent to bot",
+		};
 	}
 }

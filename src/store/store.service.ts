@@ -26,4 +26,5 @@ export class StoreService {
 	remove(id: number) {
 		return this.storeModel.destroy({ where: { id } });
 	}
+	
 }

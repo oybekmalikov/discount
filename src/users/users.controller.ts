@@ -3,6 +3,8 @@ import {
 	Controller,
 	Delete,
 	Get,
+	HttpCode,
+	HttpStatus,
 	Param,
 	Patch,
 	Post,
@@ -10,6 +12,7 @@ import {
 } from "@nestjs/common";
 import { UserGuard } from "../common/guards/user.guard";
 import { CreateUserDto } from "./dto/create-user.dto";
+import { PhoneUserDto } from "./dto/phone-user.dto";
 import { UpdateUserDto } from "./dto/update-user.dto";
 import { UsersService } from "./users.service";
 
@@ -44,5 +47,10 @@ export class UsersController {
 	@Get("activate/:link")
 	activateUser(@Param("link") link: string) {
 		return this.usersService.activateUser(link);
+	}
+	@HttpCode(HttpStatus.OK)
+	@Post("new-otp")
+	async newOtp(@Body() phoneUserDto: PhoneUserDto) {
+		return this.usersService.newOtp(phoneUserDto);
 	}
 }
