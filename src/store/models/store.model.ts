@@ -12,6 +12,7 @@ import { District } from "../../district/model/district.model";
 import { Region } from "../../region/models/region.model";
 import { Status } from "../../status/models/status.model";
 import { StoreSocialLink } from "../../store_social_links/models/store_social_link.model";
+import { StoreSubscribe } from "../../store_subscribes/models/store_subscribe.model";
 import { User } from "../../users/models/user.model";
 
 interface IStoreCreationAttr {
@@ -72,4 +73,6 @@ export class Store extends Model<Store, IStoreCreationAttr> {
 	storeSocialLink: StoreSocialLink[];
 	@HasMany(() => Discount)
 	discount: Discount[];
+	@HasMany(() => StoreSubscribe)
+	storeSubscribe: StoreSubscribe[];
 }

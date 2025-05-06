@@ -3,10 +3,13 @@ import {
 	Column,
 	DataType,
 	ForeignKey,
+	HasMany,
 	Model,
 	Table,
 } from "sequelize-typescript";
 import { Category } from "../../category/models/category.model";
+import { Favourite } from "../../favourites/models/favourite.model";
+import { Review } from "../../reviews/models/review.model";
 import { Store } from "../../store/models/store.model";
 import { Type } from "../../type/models/type.model";
 
@@ -58,4 +61,8 @@ export class Discount extends Model<Discount, IDiscountCreationAttr> {
 	category: Category;
 	@BelongsTo(() => Type)
 	type: Type;
+	@HasMany(() => Review)
+	review: Review[];
+	@HasMany(() => Favourite)
+	favourite: Favourite[];
 }

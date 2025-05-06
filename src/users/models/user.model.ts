@@ -1,5 +1,8 @@
 import { Column, DataType, HasMany, Model, Table } from "sequelize-typescript";
+import { Favourite } from "../../favourites/models/favourite.model";
+import { Review } from "../../reviews/models/review.model";
 import { Store } from "../../store/models/store.model";
+import { StoreSubscribe } from "../../store_subscribes/models/store_subscribe.model";
 
 interface IUserCreationAttr {
 	name: string;
@@ -36,4 +39,10 @@ export class User extends Model<User, IUserCreationAttr> {
 	declare activation_link: string;
 	@HasMany(() => Store)
 	store: Store[];
+	@HasMany(() => Review)
+	review: Review[];
+	@HasMany(() => Favourite)
+	favourite: Favourite[];
+	@HasMany(() => StoreSubscribe)
+	storeSubscribe: StoreSubscribe[];
 }
