@@ -18,7 +18,7 @@ import { MailService } from "./mail.service";
 					},
 				},
 				defaults: {
-					from: `'Discount' <${config.get<string>("SMTOP_HOST")}>`,
+					from: `'Discount' <${config.get<string>("SMTP_HOST")}>`,
 				},
 				template: {
 					dir: join(__dirname, "templates"),

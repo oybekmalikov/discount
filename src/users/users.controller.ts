@@ -14,6 +14,7 @@ import { UserGuard } from "../common/guards/user.guard";
 import { CreateUserDto } from "./dto/create-user.dto";
 import { PhoneUserDto } from "./dto/phone-user.dto";
 import { UpdateUserDto } from "./dto/update-user.dto";
+import { VerifyOtpDto } from "./dto/verify-user.dto";
 import { UsersService } from "./users.service";
 
 @Controller("users")
@@ -52,5 +53,10 @@ export class UsersController {
 	@Post("new-otp")
 	async newOtp(@Body() phoneUserDto: PhoneUserDto) {
 		return this.usersService.newOtp(phoneUserDto);
+	}
+	@HttpCode(HttpStatus.OK)
+	@Post("verify-otp")
+	async verifyOtp(@Body() verifyOtpDto: VerifyOtpDto) {
+		return this.usersService.verifyOtp(verifyOtpDto);
 	}
 }

@@ -7,6 +7,7 @@ import { Ads } from "./ads/models/ads.model";
 import { BOT_NAME } from "./app.constants";
 import { AuthModule } from "./auth/auth.module";
 import { BotModule } from "./bot/bot.module";
+import { Address } from "./bot/models/address.model";
 import { Bot } from "./bot/models/bot.model";
 import { CategoryModule } from "./category/category.module";
 import { Category } from "./category/models/category.model";
@@ -35,8 +36,10 @@ import { StoreSubscribe } from "./store_subscribes/models/store_subscribe.model"
 import { StoreSubscribesModule } from "./store_subscribes/store_subscribes.module";
 import { Type } from "./type/models/type.model";
 import { TypeModule } from "./type/type.module";
+import { Otp } from "./users/models/otp.model";
 import { User } from "./users/models/user.model";
 import { UsersModule } from "./users/users.module";
+import { SmsModule } from './sms/sms.module';
 @Module({
 	imports: [
 		ConfigModule.forRoot({ envFilePath: ".env", isGlobal: true }),
@@ -72,6 +75,8 @@ import { UsersModule } from "./users/users.module";
 				Review,
 				Favourite,
 				StoreSubscribe,
+				Otp,
+				Address,
 			],
 			autoLoadModels: true,
 			sync: { alter: true },
@@ -95,6 +100,7 @@ import { UsersModule } from "./users/users.module";
 		ReviewsModule,
 		FavouritesModule,
 		StoreSubscribesModule,
+		SmsModule,
 	],
 	controllers: [],
 	providers: [],

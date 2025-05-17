@@ -23,7 +23,7 @@ export class Category extends Model<Category, ICategoryCreationAttr> {
 	@Column({ type: DataType.STRING })
 	declare description: string;
 	@ForeignKey(() => Category)
-	@Column({ type: DataType.NUMBER })
+	@Column({ type: DataType.INTEGER })
 	declare parentId: number;
 	@BelongsTo(() => Category)
 	declare parent?: Category;

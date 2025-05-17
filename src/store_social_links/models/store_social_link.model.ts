@@ -27,10 +27,10 @@ export class StoreSocialLink extends Model<
 	@Column({ type: DataType.STRING })
 	declare description: string;
 	@ForeignKey(() => Store)
-	@Column({ type: DataType.NUMBER })
+	@Column({ type: DataType.INTEGER })
 	declare storeId: number;
 	@ForeignKey(() => SocialMediaType)
-	@Column({ type: DataType.NUMBER })
+	@Column({ type: DataType.INTEGER })
 	declare socialMediaTypeId: number;
 	@BelongsTo(() => SocialMediaType)
 	socialmediatype: SocialMediaType;
